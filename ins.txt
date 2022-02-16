@@ -1,0 +1,11 @@
+python3 manage.py migrate
+python3 manage.py runserver
+python3 manage.py startapp booking
+python3 manage.py makemigrations
+python3 manage.py createsuperuser
+project414744 - harshal
+urls.py - views - templates
+git add .
+git commit -m "second website"
+git push -u origin main
+code -a .
