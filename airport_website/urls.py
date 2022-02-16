@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from spages.views import home_page
 from booking.views import booking_details
+from booking.views import flight_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page),
     path('booking/', booking_details),
+    path('booking/<pk>/', flight_detail),
 ]
+# path('booking/', include('booking.urls', namespace="booking")),

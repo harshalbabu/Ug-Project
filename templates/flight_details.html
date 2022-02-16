@@ -8,6 +8,13 @@
 </head>
 <body>
     <table><tr><th>Flight no</th><th>Flight name</th><th>From</th><th>To</th></tr>
-    <tr></tr></table>
+    {% for f in data %}
+      <tr><td><a href="/booking/{{ f.pk }}"> {{ f.flight_no}}</a> </td>
+      <td> {{ f.flight_name }} </td>
+      <td> {{ f.from_to }} </td>
+      <td> {{ f.to }} </td>
+    </tr>
+    {% endfor %}
+</table>
 </body>
 </html>
