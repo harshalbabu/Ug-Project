@@ -14,18 +14,35 @@ cursor = sqliteConnection.cursor()
 
 
 def insert_flight_details(cursor):
-    id = input("enter id: ")
+
+    cursor.execute("SELECT MAX(trip_id) FROM booking_flight_details;")
+    max = cursor.fetchone()[0]
+    if max is None:
+        max = 0
+    print(max)
     f_id = input("enter flight id: ")
     f_name = input("enter flight name: ")
-    t_id = input("enter travel id: ")
     f = input("from: ")
     to = input("to: ")
-    c = f"insert into booking_flight_details values({id},{f_id},'{f_name}',{t_id},'{f}','{to}')"
+    c = f"insert into booking_flight_details values({max+1},{f_id},'{f_name}','{f}','{to}')"
     print(c)
     cursor.execute(c)
     return cursor
 
+def show_passanger(cursor):
+    cursor.execute("SELECT * FROM booking_booking;")
+    data = cursor.fetchall()
+    print(data)
+    return cursor
 
-cursor = insert_flight_details(cursor)
+
+
+choice = input("select choice : ")
+if choice == '1':
+    cursor = insert_flight_details(cursor)
+elif choice == '2':
+    show_passanger(cursor)
+else:
+    print("\ninvalied input\nExiting.....")
 sqliteConnection.commit()
 sqliteConnection.close()

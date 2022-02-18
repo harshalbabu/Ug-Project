@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.db.models import Max
 from .models import Flight_details
+from .models import Booking
 from .forms import PassangerForm
 
 # Create your views here.
@@ -12,7 +14,7 @@ def booking_details(request):
 
 
 def flight_detail(request, pk):
-    flight = Flight_details.objects.get(id=pk)
+    flight = Flight_details.objects.get(trip_id=pk)
     context = {
         "f" : flight
     }
@@ -26,7 +28,8 @@ def passanger_details(request, pk):
         if form.is_valid():
             print(request.POST['name'])
             context = {
-                "pk" : pk
+                "pk" : pk, 
+                "passanger" : form
             }
             return render(request, "passanger_v.html", context)
 
@@ -40,4 +43,8 @@ def payment(request, pk):
     context = {
         "pk" : pk
     }
+    m = Booking.objects.aggregate(Max('trip_id'))['trip_id__max']
+    if m is None:
+        m = 0
+    print("paymeent - " + request.POST['name'], m)
     return render(request, "payment.html", context)
