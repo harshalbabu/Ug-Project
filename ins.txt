@@ -9,3 +9,11 @@ git add .
 git commit -m "second website"
 git push -u origin main
 code -a .
+
+
+
+
+gui management.py
+email
+design webpage
+deploy

@@ -30,9 +30,17 @@ def insert_flight_details(cursor):
     return cursor
 
 def show_passanger(cursor):
-    cursor.execute("SELECT * FROM booking_booking;")
+    cursor.execute("SELECT * FROM booking_flight_details;")
     data = cursor.fetchall()
-    print(data)
+    for d in data:
+        print(f"{d[0]} - {d[1]} - {d[2]} - {d[3]} - {d[4]}")
+    print()
+    f = input("enter trip id >>> ")
+    cursor.execute(f"SELECT * FROM booking_booking where trip_id = {f}")
+    data = cursor.fetchall()
+    print()
+    for d in data:
+        print(f"{d[0]} - {d[2]}")
     return cursor
 
 
