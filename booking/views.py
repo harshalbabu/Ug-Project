@@ -43,8 +43,15 @@ def payment(request, pk):
     context = {
         "pk" : pk
     }
-    m = Booking.objects.aggregate(Max('trip_id'))['trip_id__max']
+    m = Booking.objects.aggregate(Max('passanger_id'))['passanger_id__max']
     if m is None:
         m = 0
+    m = m + 1
+    name = request.POST['name']
     print("paymeent - " + request.POST['name'], m)
+    Booking.objects.create(
+        passanger_id=m,
+        trip_id=pk,
+        name=request.POST['name']
+    )
     return render(request, "payment.html", context)
