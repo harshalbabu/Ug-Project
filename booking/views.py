@@ -21,20 +21,9 @@ def flight_detail(request, pk):
     return render(request, "flight.html", context)
 
 def passanger_details(request, pk):
-    form = PassangerForm()
-    if request.method == "POST":
-        print("recived post request")
-        form = PassangerForm(request.POST)
-        if form.is_valid():
-            print(request.POST['name'])
-            context = {
-                "pk" : pk, 
-                "passanger" : form
-            }
-            return render(request, "passanger_v.html", context)
-
+    flight = Flight_details.objects.get(trip_id=pk)
     context = {
-        "passanger" : PassangerForm(),
+        "f" : flight,
         "pk" : pk
     }
     return render(request, "passanger.html", context)
@@ -47,11 +36,29 @@ def payment(request, pk):
     if m is None:
         m = 0
     m = m + 1
-    name = request.POST['name']
-    print("paymeent - " + request.POST['name'], m)
-    Booking.objects.create(
-        passanger_id=m,
-        trip_id=pk,
-        name=request.POST['name']
-    )
+    code = request.POST['code']
+    pn = request.POST['phone']
+    em = request.POST['email']
+    no = request.POST['number']
+    seat = request.POST['seat']
+    cost = request.POST['cost']
+    for i in range(int(no)):
+        i = i+1;
+        f_name = request.POST['f_name'+str(i)]
+        l_name = request.POST['l_name'+str(i)]
+        g = request.POST['gender'+str(i)]
+        print(code,pn,em,f_name,l_name,g,cost,sep="-")
+        Booking.objects.create(
+            passanger_id=m,
+            trip_id=pk,
+            f_name=f_name,
+            l_name=l_name,
+            g=g,
+            code=code,
+            pn=pn,
+            email=em,
+            seat=seat,
+            cost=cost
+        )
+        m=m+1
     return render(request, "payment.html", context)

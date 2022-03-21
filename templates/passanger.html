@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{% static 'reg.css' %}">
 </head>
 <body>
+  <form method="post" action="/flight/{{ pk }}/pay/"> 
+    {% csrf_token %}
+    <input type="hidden" id="costId" name="cost" value="{{ f.cost_e }}">
+    <input type="hidden" id="seat_temp" name="seat" value="e">
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-6 mx-auto flex flex-wrap flex-col tem">
     <div class="flex mx-auto flex-wrap mb-4">
@@ -59,7 +63,7 @@
           <input type="email" id="email" name="email" placeholder="Email Id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
         </div>
         <br>
-        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue1()">Continue</button>
+        <button type="button" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue1()">Continue</button>
       </div>
     </div>
     <div class="container px-5 py-12 mx-auto" id="two">
@@ -67,20 +71,20 @@
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Ticket and Services</h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
       </div>
-      <div class="flex flex-wrap -m-4">
-      <div class="p-4 xl:w-1/4 md:w-1/2 w-full ml-60 price">
+      <div id="tempe" class="flex flex-wrap -m-4">
+      <div id="econ" class="p-4 xl:w-1/4 md:w-1/2 w-full ml-60 price" onclick="economy()">
           <div class="h-full p-6 rounded-lg border-2 border-indigo-500 flex flex-col relative overflow-hidden">
-            <span class="bg-indigo-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">POPULAR</span>
-            <h2 class="text-sm tracking-widest title-font mb-1 font-medium">Standard</h2>
-            <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-              <span>5000</span>
+            <span class="bg-indigo-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">SELECTED</span>
+            <h2 class="text-sm tracking-widest title-font mb-1 font-medium">Economy class</h2>
+            <h1 id="econ_c" class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+              <span>{{ f.cost_e }}</span>
             </h1>
            </div>
         </div>
-        <div class="p-4 xl:w-1/4 md:w-1/2 w-full price">
+        <div id="busi" class="p-4 xl:w-1/4 md:w-1/2 w-full price" onclick="business()">
           <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-            <h2 class="text-sm tracking-widest title-font mb-1 font-medium">Business</h2>
-            <h1 class="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">10000</h1>
+            <h2 class="text-sm tracking-widest title-font mb-1 font-medium">Business class</h2>
+            <h1 id="econ_b" class="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{ f.cost_b }}</h1>
           </div>
         </div>
         <br>
@@ -90,7 +94,7 @@
           <label for="number" class="leading-7 text-sm text-gray-600 ml-60">No. of Passangers</label><br>
           <input type="number" max=10 min=1 value=1 id="number" size="10" name="number" class="w-20 ml-60 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
         </div>
-      <button class="text-white bg-indigo-500 border-0 py-2 px-8 mx-60 my-5 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue2()">Continue</button>
+      <button type="button" class="text-white bg-indigo-500 border-0 py-2 px-8 mx-60 my-5 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue2()">Continue</button>
     </div>
     <div class="container px-5 py-12 mx-auto" id="three">
       <div class="flex flex-col text-center w-full mb-12">
@@ -99,7 +103,7 @@
       </div>
       <div class="flex lg:w-2/3 w-full flex-col mx-auto px-8 sm:space-y-0 space-y-4 sm:px-0 items-start">
           <div id="temp1"></div>
-        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue3()">Continue</button>
+        <button type="button" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="continue3()">Continue</button>
       </div>
     </div>
      <div class="container px-5 mx-auto" id="four">
@@ -128,7 +132,7 @@
           <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </a>
-      <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">PAY</button>
+      <button type="submit" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">PAY</button></form>
     </div>
   </div>
   </div>
