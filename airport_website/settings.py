@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-5sg@f5cw0^^)%j4fr1@=th3qr#rp*un9oymklq4mcgxlydylhn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "airportsite.herokuapp.com"
+    "airportsite.herokuapp.com",
+    "127.0.0.1"
 ]
 
 
