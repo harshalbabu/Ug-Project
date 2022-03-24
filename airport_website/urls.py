@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from spages.views import home_page
+from spages.views import home_page, map, faq, rules, about
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page),
+    path('map/', map),
+    path('faq/', faq),
+    path('about/', about),
+    path('rules', rules),
     path('flight/', include('booking.urls', namespace="booking")),
 ]
 

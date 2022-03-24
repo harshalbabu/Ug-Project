@@ -1,24 +1,44 @@
 from django.shortcuts import render
+import datetime
 from django.db.models import Max
 from .models import Flight_details
 from .models import Booking
 from .forms import PassangerForm
-
+import math
+import json
 # Create your views here.
 def booking_details(request):
     details = Flight_details.objects.all()
+    f=open("list.json","r")
+    r = json.load(f)[0]
+    f.close()
+    t = []
+    f_time = []
+    data = []
+    for i in range(len(details)):
+        if details[i].to == "CCJ":
+            t =  False
+        else:
+            t = True
+        f_pl = ""
+        l_pl = ""
+        for j in r:
+            if j[0]== details[i].from_to:
+                f_pl = j[1]
+            if j[0]== details[i].to:
+                l_pl = j[1]
+        ft = details[i].from_time.strftime("%I:%M %p")
+        tt = details[i].to_time.strftime("%I:%M %p")
+        fd = details[i].from_time.strftime("%d %b")
+        td = details[i].to_time.strftime("%d %b")
+        d = details[i].to_time - details[i].from_time
+        d = divmod(math.ceil(divmod(d.total_seconds(), 60)[0])+1,60)
+        data.append((t, ft, tt, fd, td, f'{d[0]}h {d[1]}m', f_pl, l_pl, details[i]))
+    print(t,f_time)
     context = {
-        "data" : details
+        "data" : data,
     }
     return render(request, "flight_details.html", context)
-
-
-def flight_detail(request, pk):
-    flight = Flight_details.objects.get(trip_id=pk)
-    context = {
-        "f" : flight
-    }
-    return render(request, "flight.html", context)
 
 def passanger_details(request, pk):
     flight = Flight_details.objects.get(trip_id=pk)
@@ -36,6 +56,7 @@ def payment(request, pk):
     if m is None:
         m = 0
     m = m + 1
+    print(m)
     code = request.POST['code']
     pn = request.POST['phone']
     em = request.POST['email']

@@ -11,6 +11,8 @@ class Flight_details(models.Model):
     to_time = models.DateTimeField()
     cost_e = models.IntegerField()
     cost_b = models.IntegerField()
+    delay = models.IntegerField()
+    cancellation = models.IntegerField()
 
 class Booking(models.Model):
     passanger_id = models.AutoField(primary_key=True)

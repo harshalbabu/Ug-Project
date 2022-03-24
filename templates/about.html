@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,25 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="temp.css" />
-    <link rel="stylesheet" href="about.css" />
+    <link rel="stylesheet" href="{% static 'det.css' %}" />
+    <link rel="stylesheet" href="{% static 'about.css' %}" />
 </head>
 
 <body>
     <header class="text-gray-600 body-font">
         <div class="container flex flex-wrap px-5 flex-col md:flex-row items-center">
-            <button style="height: 30px; width: 40px"
-                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-500 rounded text-base mt-4 md:mt-0">
-                <img src="ar.svg" alt="back" /></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                <img src="1.png" width="60px" height="60px" alt="" />
-                <span class="ml-3" style="font-size: 2em">Airport</span>
+            
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
+                <img src="{% static '1.png' %}" width="60px" height="60px" alt="">
+                <span class="ml-3" style="font-size: 2em;">Calicut Airport</span>
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-gray-900">Home</a>
-                <a class="mr-5 hover:text-gray-900">About</a>
-                <a class="mr-5 hover:text-gray-900">Rules</a>
-                <a class="mr-5 hover:text-gray-900">FAQ</a>
+                <a class="mr-5 hover:text-gray-900" href="/">Home</a>
+                <a class="mr-5 hover:text-gray-900" href="/about">About</a>
+                <a class="mr-5 hover:text-gray-900" href="/rules">Rules</a>
+                <a class="mr-5 hover:text-gray-900" href="/faq">FAQ</a>
+                <a class="mr-5 hover:text-gray-900" href="/map">Map</a>
             </nav>
         </div>
     </header>
@@ -87,11 +87,12 @@
     <footer class="text-gray-600 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                <img src="1.png" width="60px" height="60px" alt="" />
+                <img src="{% static '1.png' %}" width="60px" height="60px" alt="">
                 <span class="ml-3 text-xl">Airport</span>
             </a>
-            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-                © 2020 Group-6 —
+            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">©
+                2020
+                Group-6 —
                 <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer"
                     target="_blank">@farookcollege</a>
             </p>
