@@ -54,7 +54,7 @@ def payment(request, pk):
     }
     m = Booking.objects.aggregate(Max('passanger_id'))['passanger_id__max']
     if m is None:
-        m = 0
+        m = 1000
     m = m + 1
     print(m)
     code = request.POST['code']

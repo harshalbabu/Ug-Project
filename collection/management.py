@@ -18,7 +18,7 @@ def insert_flight_details(cursor,f_id,f_name,d,t,f_time,t_time,cost_b,cost_e):
     cursor.execute("SELECT MAX(trip_id) FROM booking_flight_details;")
     max = cursor.fetchone()[0]
     if max is None:
-        max = 0
+        max = 1000
     print(max)
     if t=="a":
         f = d
@@ -31,17 +31,13 @@ def insert_flight_details(cursor,f_id,f_name,d,t,f_time,t_time,cost_b,cost_e):
     cursor.execute(c)
     return cursor
 
-def show_passanger(cursor):
+def show_flight(cursor):
     cursor.execute("SELECT * FROM booking_flight_details;")
     data = cursor.fetchall()
-    for d in data:
-        print(f"{d[0]} - {d[1]} - {d[2]} - {d[3]} - {d[4]} - {d[5]} - {d[6]}")
-    print()
-    f = input("enter trip id >>> ")
+    return data
+
+def show_passanger(cursor, f):
     cursor.execute(f"SELECT * FROM booking_booking where trip_id = {f}")
     data = cursor.fetchall()
-    print()
-    for d in data:
-        print(f"{d[0]} - {d[2]} {d[3]} - {d[4]} - +{d[5]}{d[6]} - {d[7]} - {d[8]} - {d[9]}")
-    return cursor
+    return data
 

@@ -14,7 +14,14 @@ from datetime import datetime
 sqliteConnection = sqlite3.connect('db.sqlite3', detect_types=sqlite3.PARSE_DECLTYPES)
 cursor = sqliteConnection.cursor()
 from collection.add import Add1,Add2
+from collection.display import Display1, Display2
 import collection.management 
+
+
+
+
+
+
 class Home(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -118,11 +125,21 @@ def data2(self):
             ec = self.lineEdit.text()
             bs = self.lineEdit_2.text()
         print(airport,s,f,ec,bs)
-        management.insert_flight_details(cursor,dtemp[3],dtemp[1],airport,dtemp[2],s,f,ec,bs)
+        collection.management.insert_flight_details(cursor,dtemp[3],dtemp[1],airport,dtemp[2],s,f,ec,bs)
         sqliteConnection.commit()
         ui = Home()
         ui.setupUi(MainWindow)
         MainWindow.show()
+def data3(pk):
+    data = collection.management.show_passanger(cursor, pk)
+    ui = Display2()
+    ui.setupUi(MainWindow, data,to_home)
+    MainWindow.show()
+
+def to_home():
+    ui = Home()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
 
 def a():
     print("a")
@@ -132,8 +149,10 @@ def a():
 
 def b():
     print("b")
-    ui = Home()
-    ui.setupUi(MainWindow)
+    ui = Display1()
+    data = collection.management.show_flight(cursor)
+    print(data)
+    ui.setupUi(MainWindow, data,data3,to_home)
     MainWindow.show()
 
 def c():
@@ -147,13 +166,15 @@ def d():
     ui = Home()
     ui.setupUi(MainWindow)
     MainWindow.show()
+class MaiWindow(QtWidgets.QMainWindow, Home):
+    def __init__(self, parent=None):
+        super(MaiWindow, self).__init__(parent=parent)
+        self.setupUi(self)
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Home()
-    ui.setupUi(MainWindow)
+    MainWindow = MaiWindow()
     MainWindow.show()
     sys.exit(app.exec_())
     sqliteConnection.commit()

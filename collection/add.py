@@ -10,7 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from collection.combo import ExtendedComboBox
-list_ = ["jh","edjhehd","dewhde", "dgejg", "ehgdjuh"]
+import json
+f=open("list.json","r")
+r = json.load(f)
+g = r[0]
+r = r[1]
+f.close()
+list_ = [ j for j, i in g ]
 
 class Add1(object):
     def setupUi(self, MainWindow, data):
@@ -57,7 +63,7 @@ class Add1(object):
         self.comboBox_2.setObjectName("comboBox_2")
         self.comboBox_2.addItem("")
         self.comboBox_2.setItemText(0, "")
-        for i in list_:
+        for i in r:
             self.comboBox_2.addItem("")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(20, 140, 301, 20))
@@ -109,7 +115,7 @@ class Add1(object):
         self.comboBox.setItemText(3, _translate("MainWindow", "Monthly"))
         self.pushButton.setText(_translate("MainWindow", "Next"))
         self.label.setText(_translate("MainWindow", "Frequence"))
-        for i in range(0,len(list_)):
+        for i in range(0,len(r)):
             self.comboBox_2.setItemText(i+1, _translate("MainWindow", list_[i]))
         self.label_2.setText(_translate("MainWindow", "Select/Search Airline Name :"))
         self.label_3.setText(_translate("MainWindow", "Flight No."))
