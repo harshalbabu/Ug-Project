@@ -17,6 +17,7 @@ g = r[0]
 r = r[1]
 f.close()
 list_ = [ j for j, i in g ]
+print(r,list_)
 
 class Add1(object):
     def setupUi(self, MainWindow, data):
@@ -116,7 +117,7 @@ class Add1(object):
         self.pushButton.setText(_translate("MainWindow", "Next"))
         self.label.setText(_translate("MainWindow", "Frequence"))
         for i in range(0,len(r)):
-            self.comboBox_2.setItemText(i+1, _translate("MainWindow", list_[i]))
+            self.comboBox_2.setItemText(i+1, _translate("MainWindow", r[i]))
         self.label_2.setText(_translate("MainWindow", "Select/Search Airline Name :"))
         self.label_3.setText(_translate("MainWindow", "Flight No."))
 

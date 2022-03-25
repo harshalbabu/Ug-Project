@@ -15,6 +15,8 @@ sqliteConnection = sqlite3.connect('db.sqlite3', detect_types=sqlite3.PARSE_DECL
 cursor = sqliteConnection.cursor()
 from collection.add import Add1,Add2
 from collection.display import Display1, Display2
+from collection.update import Update1, Update2
+from collection.delete import delete1
 import collection.management 
 
 
@@ -133,8 +135,36 @@ def data2(self):
 def data3(pk):
     data = collection.management.show_passanger(cursor, pk)
     ui = Display2()
-    ui.setupUi(MainWindow, data,to_home)
+    ui.setupUi(MainWindow, data,b)
     MainWindow.show()
+
+def data4(pk):
+    ui = Update2()
+    ui.setupUi(MainWindow,pk,u_cost,delay,cancel,a)
+    MainWindow.show()
+
+def data5(pk):
+    collection.management.delete(cursor,pk)
+    sqliteConnection.commit()
+    d()
+
+def cancel(self,pk):
+    collection.management.cancel(cursor,pk)
+    sqliteConnection.commit()
+    a()
+
+def delay(self,pk):
+    t = self.lineEdit_3.text()
+    collection.management.delay(cursor,pk,t)
+    sqliteConnection.commit()
+    a()
+
+def u_cost(self,pk):
+    e = self.lineEdit.text()
+    bu = self.lineEdit_2.text()
+    collection.management.u_cost(cursor,pk,e,bu)
+    sqliteConnection.commit()
+    a()
 
 def to_home():
     ui = Home()
@@ -143,8 +173,10 @@ def to_home():
 
 def a():
     print("a")
-    ui = Add1()
-    ui.setupUi(MainWindow, data)
+    ui = Update1()
+    data = collection.management.show_flight(cursor)
+    print(data)
+    ui.setupUi(MainWindow, data,data4,to_home)
     MainWindow.show()
 
 def b():
@@ -163,8 +195,10 @@ def c():
 
 def d():
     print("d")
-    ui = Home()
-    ui.setupUi(MainWindow)
+    ui = delete1()
+    data = collection.management.show_flight(cursor)
+    print(data)
+    ui.setupUi(MainWindow, data,data5,to_home)
     MainWindow.show()
 class MaiWindow(QtWidgets.QMainWindow, Home):
     def __init__(self, parent=None):

@@ -36,6 +36,21 @@ def show_flight(cursor):
     data = cursor.fetchall()
     return data
 
+def delete(cursor,f):
+    cursor.execute(f"DELETE FROM booking_flight_details where trip_id = {f}")
+
+def cancel(cursor,f):
+    cursor.execute(f"UPDATE booking_flight_details set cancellation=1 where trip_id = {f}")
+
+def delay(cursor,f,t):
+    cursor.execute(f"UPDATE booking_flight_details set delay={t} where trip_id = {f}")
+
+def u_cost(cursor,f,e,b):
+    if e != "":
+        cursor.execute(f"UPDATE booking_flight_details set cost_e={e} where trip_id = {f}")
+    if b != "":
+        cursor.execute(f"UPDATE booking_flight_details set cost_b={b} where trip_id = {f}")
+
 def show_passanger(cursor, f):
     cursor.execute(f"SELECT * FROM booking_booking where trip_id = {f}")
     data = cursor.fetchall()
