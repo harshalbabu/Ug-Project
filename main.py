@@ -84,13 +84,13 @@ class Home(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Home"))
         self.button1.setText(_translate("MainWindow", "Update"))
         self.button2.setText(_translate("MainWindow", "List Of Passangers"))
         self.button3.setText(_translate("MainWindow", "Add Flight"))
         self.button4.setText(_translate("MainWindow", "Delete Flight"))
 def data(self):
-    f = self.comboBox.currentText()
+    f = "once"
     name = self.comboBox_2.currentText()
     if name=="":
         text = "No Flight Name Entered"

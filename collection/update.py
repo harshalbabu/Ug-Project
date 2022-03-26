@@ -141,7 +141,7 @@ class Update1(object):
 
     def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
-        mainWindow.setWindowTitle(_translate("mainWindow", "Flight List"))
+        mainWindow.setWindowTitle(_translate("mainWindow", "Update Flight"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("mainWindow", "Trip_no"))
         item = self.tableWidget.horizontalHeaderItem(1)

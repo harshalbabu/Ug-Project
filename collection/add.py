@@ -34,17 +34,17 @@ class Add1(object):
         self.radioButton_2.setGeometry(QtCore.QRect(160, 20, 112, 23))
         self.radioButton_2.setChecked(True)
         self.radioButton_2.setObjectName("radioButton_2")
-        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(130, 90, 86, 25))
+        '''self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(130, 90, 86, 25))'''
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
         font.setItalic(True)
-        self.comboBox.setFont(font)
+        '''self.comboBox.setFont(font)
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        self.comboBox.addItem("")
+        self.comboBox.addItem("")'''
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(280, 310, 141, 51))
         self.pushButton.setObjectName("pushButton")
@@ -107,13 +107,14 @@ class Add1(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Add Flight"))
         self.radioButton.setText(_translate("MainWindow", "Arrival"))
         self.radioButton_2.setText(_translate("MainWindow", "Departure"))
+        '''
         self.comboBox.setItemText(0, _translate("MainWindow", "Once"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Daily"))
         self.comboBox.setItemText(2, _translate("MainWindow", "Weekly"))
-        self.comboBox.setItemText(3, _translate("MainWindow", "Monthly"))
+        self.comboBox.setItemText(3, _translate("MainWindow", "Monthly"))'''
         self.pushButton.setText(_translate("MainWindow", "Next"))
         self.label.setText(_translate("MainWindow", "Frequence"))
         for i in range(0,len(r)):
@@ -226,7 +227,7 @@ class Add2(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Add Flight"))
         for i in range(0,len(list_)):
             self.comboBox_2.setItemText(i+1, _translate("MainWindow", list_[i]))
         if self.d[2]=="d":

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Flight Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'det.js' %}"></script>
     <link rel="stylesheet" href="{% static 'det.css' %}">
@@ -30,7 +30,7 @@
             </nav>
         </div>
     </header>
-    <div class="flex mx-auto rounded mx-10 overflow-hidden mt-6">
+    <div class="flex mx-auto rounded mx-10 overflow-hidden mt-6" style="display: none;">
         <button class="py-1 px-4 bg-indigo-500 text-white focus:outline-none" id="from" onclick="c_from()">From</button>
         <button class="py-1 px-4 focus:outline-none" id="to" onclick="c_to()">To</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,16 +51,16 @@
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-3 mx-auto">
             <div class="py-1 px-4 mb-5 flex flex-wrap md:flex-nowrap border-2">
-                <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                     <span class="font-semibold title-font text-gray-700">Airlines</span>
                 </div>
-                <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                <div class="md:w-60 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                     <span class="font-semibold title-font text-black">Departure</span>
                 </div>
-                <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                <div class="md:w-60 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                     <span class="font-semibold title-font text-black">Arrival</span>
                 </div>
-                <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                <div class="md:w-48 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                     <span class="font-semibold title-font text-black">Duration</span>
                 </div>
                 <div class="md:w-20 md:mb-0 mb-6 ml-2 flex-shrink-0 flex flex-col">
@@ -73,24 +73,24 @@
                 
       </div>
                 </div>
-                {% for t, ft, tt, fd, td, d,f_pl,l_pl,f in data %}
-                <div class="mt-2 p-4 flex flex-wrap md:flex-nowrap border-2">
-                    <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                {% for t, ft, tt, fd, td, d,f_pl,l_pl,c,isdelay,d1,d2,d3,d4,f in data %}
+                <div class="mt-2 p-4 flex flex-wrap md:flex-nowrap border-2{% if c %} bg-slate-400{% endif %}">
+                    <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                         <span class="font-semibold title-font text-gray-700">{{ f.flight_name }}</span>
                         <a class="text-indigo-500 inline-flex text-xs items-center mt-2">Show Details
                         </a>
                     </div>
-                    <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                        <span class="font-semibold title-font text-black">{{ ft }}&nbsp;&nbsp;<span class="mt-1 text-gray-500 text-sm">{{ fd }}</span></span>
+                    <div class="md:w-60 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <span class="font-semibold title-font text-black">{{ ft }}&nbsp;&nbsp;<span class="mt-1 text-gray-500 text-sm">{{ fd }}</span></span>{% if isdelay %}<span class="font-semibold"><span class="text-sm text-red-700 line-through">{{ d1 }}</span>&nbsp;&nbsp;<span class="mt-1 text-red-600 text-xs line-through">{{ d2 }}</span></span>{% endif %}
                         <p class="leading-relaxed">({{ f.from_to }})</p>
                         <span class="mt-1 text-gray-500 text-sm">{{ f_pl }}</span>
                     </div>
-                    <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                        <span class="font-semibold title-font text-black">{{ tt }}&nbsp;&nbsp;<span class="mt-1 text-gray-500 text-sm">{{ td }}</span></span>
+                    <div class="md:w-60 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <span class="font-semibold title-font text-black">{{ tt }}&nbsp;&nbsp;<span class="mt-1 text-gray-500 text-sm">{{ td }}</span></span>{% if isdelay %}<span class="font-semibold"><span class="text-sm text-red-700 line-through">{{ d3 }}</span>&nbsp;&nbsp;<span class="mt-1 text-red-600 text-xs line-through">{{ d4 }}</span></span>{% endif %}
                         <p class="leading-relaxed">({{ f.to }})</p>
                         <span class="mt-1 text-gray-500 text-sm">{{ l_pl }}</span>
                     </div>
-                    <div class="md:w-52 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                    <div class="md:w-48 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                         <span class="font-semibold title-font text-black">{{ d }}</span>
                     </div>
                     {% if t %}
@@ -103,10 +103,18 @@
                        <div class="my-auto"> <p class="font-semibold mb-4 title-font text-black">₹{{ f.cost_e }}</p>
                         <p class="font-semibold title-font text-black">₹{{ f.cost_b }}</p></div>
                     </div>
+                    {% endif %}
+                    {% if c %}
+                    <div class="md:w-28 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <span class="font-semibold title-font text-red-800">CANCELLED</span>
+                    </div>
+                    {% else %}
+                    {% if t %}
                     <div class="md:w-28 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                        <a href="/flight/{{ f.pk }}/book"> <button type="button"
               class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none my-auto hover:bg-indigo-600 rounded text-lg">Book</button>
           </div>
+          {% endif %}
           {% endif %}
                     </div>
                     {% endfor %}
