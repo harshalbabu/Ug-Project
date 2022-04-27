@@ -57,8 +57,10 @@ class Add1(object):
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
+        '''
         self.label.setFont(font)
         self.label.setObjectName("label")
+        '''
         self.comboBox_2 = ExtendedComboBox(self.centralwidget)
         self.comboBox_2.setGeometry(QtCore.QRect(20, 170, 121, 31))
         self.comboBox_2.setObjectName("comboBox_2")
@@ -116,7 +118,9 @@ class Add1(object):
         self.comboBox.setItemText(2, _translate("MainWindow", "Weekly"))
         self.comboBox.setItemText(3, _translate("MainWindow", "Monthly"))'''
         self.pushButton.setText(_translate("MainWindow", "Next"))
+        '''
         self.label.setText(_translate("MainWindow", "Frequence"))
+        '''
         for i in range(0,len(r)):
             self.comboBox_2.setItemText(i+1, _translate("MainWindow", r[i]))
         self.label_2.setText(_translate("MainWindow", "Select/Search Airline Name :"))
